@@ -1,0 +1,10 @@
+# Executables
+*.exe
+*.out
+*.app
+
+# Object files and build outputs
+*.o
+*.obj
+build/
+.vscode/
