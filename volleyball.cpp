@@ -7,7 +7,8 @@
 #include <random>
 #include <cmath>
 
-// welcome back, MA; this program is meant to be a text-based volleyball simulation
+/* this program simulates a volleyball player's journey to greatness!
+this program is entirely text based, and it utilizes random numbers to determine interactions on the court. enjoy :) */
 
 void shortdelay() { // function used to delay text appearance; for cosmetic purposes
     std::this_thread::sleep_for(std::chrono::milliseconds(900));
@@ -28,7 +29,6 @@ class Player { // the Player class holds the attributes of the digital volleybal
             std::cout << "Set player name to " << n << ".\n";
             longdelay();
         }
-
         void setPosition(int p) {
             switch (p) {
                 case 1:
@@ -53,7 +53,6 @@ class Player { // the Player class holds the attributes of the digital volleybal
             std::cout << "\n" << name << " now has the position: " << position << ".\n";
             longdelay();
         }
-    
         void setGamesPlayed(int g) {
             gamesPlayed = g;
         }
@@ -103,7 +102,7 @@ class Player { // the Player class holds the attributes of the digital volleybal
         }
 };
 
-class Team { // the team class holds a roster of player objects 
+class Team { // the team class holds a roster (std::vector<Player>) of players
     private:
         std::vector<Player> roster;
         std::string name;
@@ -138,7 +137,7 @@ class Team { // the team class holds a roster of player objects
             longdelay();
         }
 
-        Team() : name("Unnamed Team"), wins(0) {} // default team constructor
+        Team() : name("Unnamed Team"), wins(0) {} // default team constructor for when teams are declared without a name
         Team(std::string n, int w = 0) { // team constructor
             name = n;
             wins = w;
@@ -153,7 +152,7 @@ class Game { // the game class allows a match to start and uses team and player 
         Team homeTeam, awayTeam;
         unsigned int homeTeamPoints, awayTeamPoints;
     public:
-        void runGame(Team& home, Team& away, unsigned int pointLimit = 25, int userTeam = 1) {
+        void runGame(Team& home, Team& away, unsigned int pointLimit = 25, int userTeam = 1) { // begins a match between the home and away teams
             homeTeamPoints = 0;
             awayTeamPoints = 0;
 
@@ -168,13 +167,13 @@ class Game { // the game class allows a match to start and uses team and player 
             std::cout << home.getName() << " will serve first.";
             longdelay();
 
-            if (userTeam == 1) {
+            if (userTeam == 1) { // runs when the user's team is the home team
                 while (serve(home.getRoster().front()) == 1) {
                     homeTeamPoints += 1;
                     std::cout << home.getName() << "\tVS.\t" << away.getName() << "\n" << homeTeamPoints << "-" << awayTeamPoints << "\n";
                     longdelay();
                 }
-            } else {
+            } else { // runs when the user's team is the away team
                 while (serve(away.getRoster().front()) == 1) {
                     awayTeamPoints += 1;
                     std::cout << home.getName() << "\tVS.\t" << away.getName() << "\n" << homeTeamPoints << "-" << awayTeamPoints << "\n";
